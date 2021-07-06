@@ -3,8 +3,9 @@ import { Formik } from "formik";
 import * as yup from "yup";
 
 import FormikTextInput from "./FormikTextInput";
-import Text from "./Text";
 import Button from "./SubmitButton";
+import useSignIn from "../hooks/useSignIn";
+import AuthStorage from "../utils/authStorage";
 
 const initialValues = {
   username: "",
@@ -25,9 +26,23 @@ const validationSchema = yup.object().shape({
 });
 
 const SignIn = () => {
-  const onSubmit = (values) => {
+  const [signIn] = useSignIn();
+
+  const authStorage = new AuthStorage("auth");
+
+  const onSubmit = async (values) => {
     console.log(values);
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      authStorage.setAccessToken(data.authorize.accessToken);
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   return (
     <Formik
       initialValues={initialValues}
