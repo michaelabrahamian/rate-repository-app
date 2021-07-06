@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Pressable, Text } from "react-native";
+import { Link } from "react-router-native";
 import Constants from "expo-constants";
 import theme from "../theme";
 
@@ -16,9 +17,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ title }) => (
+const AppBarTab = ({ title, link }) => (
   <Pressable>
-    <Text style={styles.heading}>{title}</Text>
+    <Link to={link}>
+      <Text style={styles.heading}>{title}</Text>
+    </Link>
   </Pressable>
 );
 
