@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import RepoValueCard from "./RepoValueCard";
 
 const styles = StyleSheet.create({
@@ -9,8 +9,12 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const RepoFooter = ({stargazersCount, forksCount, reviewCount, ratingAverage}) => (
+const RepoFooter = ({
+  stargazersCount,
+  forksCount,
+  reviewCount,
+  ratingAverage,
+}) => (
   <View style={styles.cardFooter}>
     <RepoValueCard label="Stars" value={stargazersCount} />
     <RepoValueCard label="Forks" value={forksCount} />

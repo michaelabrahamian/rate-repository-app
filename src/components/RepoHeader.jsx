@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const RepoHeader = ({imageUrl, fullName, description, language}) => (
+const RepoHeader = ({ imageUrl, fullName, description, language }) => (
   <View style={styles.cardHeader}>
     <Image style={styles.avatar} source={{ uri: imageUrl }} />
 

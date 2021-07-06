@@ -12,11 +12,14 @@ const styles = StyleSheet.create({
   },
 });
 
+const formatCount = (count) =>
+  count < 1000 ? count : `${(count / 1000).toFixed(1)}k`;
+
 const RepoValueCard = ({ label, value }) => {
   return (
     <View style={styles.container}>
       <Text fontWeight="bold" fontSize="subHeading" style={styles.subHeading}>
-        {value}
+        {formatCount(value)}
       </Text>
       <Text color="textSecondary">{label}</Text>
     </View>
