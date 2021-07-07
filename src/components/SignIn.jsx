@@ -5,7 +5,7 @@ import * as yup from "yup";
 import FormikTextInput from "./FormikTextInput";
 import Button from "./SubmitButton";
 import useSignIn from "../hooks/useSignIn";
-import AuthStorage from "../utils/authStorage";
+import { useHistory } from "react-router-native";
 
 const initialValues = {
   username: "",
@@ -27,17 +27,18 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-
-  const authStorage = new AuthStorage("auth");
+  const history = useHistory();
 
   const onSubmit = async (values) => {
     console.log(values);
     const { username, password } = values;
 
     try {
-      const { data } = await signIn({ username, password });
-      authStorage.setAccessToken(data.authorize.accessToken);
-      console.log(data);
+      const token = await signIn({ username, password });
+      // redirect to the repositories list if successful
+      if (token) {
+        history.push("/");
+      }
     } catch (e) {
       console.log(e);
     }
